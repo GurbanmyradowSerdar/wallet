@@ -7,6 +7,9 @@ class In {
   }
 }
 let inArr = [];
+let outArr = [];
+let result = 0;
+let isFirstVisit = false;
 
 class Out {
   text;
@@ -16,9 +19,7 @@ class Out {
     this.money = money;
   }
 }
-let outArr = [];
 
-let result = 0;
 // Show input block ///////////////////////////////////////////////////////
 function showInput(which) {
   let box = document.getElementById("box");
@@ -181,23 +182,23 @@ function showRes() {
   };
 }
 
-let income = document.getElementById("income");
-// Onclick income ///////////////////////////////////////////////////////
-income.onclick = () => {
-  showInput(true);
-};
+// let income = document.getElementById("income");
+// // Onclick income ///////////////////////////////////////////////////////
+// income.onclick = () => {
+//   showInput(true);
+// };
 
-let expense = document.getElementById("expense");
-// Onclick expense ///////////////////////////////////////////////////////
-expense.onclick = () => {
-  showInput(false);
-};
+// let expense = document.getElementById("expense");
+// // Onclick expense ///////////////////////////////////////////////////////
+// expense.onclick = () => {
+//   showInput(false);
+// };
 
-let show = document.getElementById("show");
-// Onclick show ///////////////////////////////////////////////////////
-show.onclick = () => {
-  showRes();
-};
+// let show = document.getElementById("show");
+// // Onclick show ///////////////////////////////////////////////////////
+// show.onclick = () => {
+//   showRes();
+// };
 
 // append ///////////////////////////////////////////////////////
 function append(parent, elem) {
@@ -219,11 +220,14 @@ function save() {
 
 // Get values in localStorage ///////////////////////////////////////////////////////
 function load() {
-  result = Number(window.localStorage.getItem("result"));
+  result = Number(localStorage.getItem("result"));
 
-  let i = window.localStorage.getItem("inArr");
+  let i = localStorage.getItem("inArr");
   if (i !== null) inArr = JSON.parse(i);
 
-  let o = window.localStorage.getItem("outArr");
+  let o = localStorage.getItem("outArr");
   if (o !== null) outArr = JSON.parse(o);
+
+  let firstVisit = JSON.parse(localStorage.getItem("isFirstVisit"));
+  if (firstVisit !== null && firstVisit === true) isFirstVisit = true;
 }

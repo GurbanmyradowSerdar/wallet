@@ -9,11 +9,63 @@
     <link rel="shortcut icon" href="wallet.ico" type="image/x-icon" />
   </head>
   <body onbeforeunload="save()" onload="load()">
-    <div class="box" id="box">
-      <button class="box__income btn" id="income">Income</button>
-      <button class="box__expense btn" id="expense">Expense</button>
-      <button class="box__show btn" id="show">Show</button>
+    <div class="wrapper-registration">
+      <div class="registration">
+        <h2 class="registration__name">Registration</h2>
+        <div class="registration__parent registration__username">
+          <label
+            for="username__input"
+            class="registration__label username__label"
+            >username</label
+          >
+          <input
+            type="text"
+            class="registration-items-bg username__input"
+            placeholder="username..."
+            id="username__input"
+          />
+        </div>
+        <div class="registration__limits">
+          <div class="registration__parent limits__income">
+            <label for="income__input" class="registration__label income__label"
+              >daily limit</label
+            >
+            <input
+              type="text"
+              class="registration-items-bg income__input"
+              placeholder="income..."
+              id="income__input"
+            />
+          </div>
+          <div class="registration__parent limits__expense">
+            <label
+              for="expense__input"
+              class="registration__label expense__label"
+              >daily limit</label
+            >
+            <input
+              type="text"
+              class="registration-items-bg expense__input"
+              placeholder="expense..."
+              id="expense__input"
+            />
+          </div>
+        </div>
+        <div class="registration__note">
+          <p class="note__text registration-items-bg">
+            we use localstorage system, it means you mustn't delete anything
+            from localstorage, otherwise, data'll lose
+          </p>
+        </div>
+        <button class="registration__confirm primiry-button">Confirm</button>
+      </div>
     </div>
     <script src="script.js"></script>
   </body>
 </html>
+
+<!-- <div class="box" id="box">
+    <button class="box__income btn" id="income">Income</button>
+    <button class="box__expense btn" id="expense">Expense</button>
+    <button class="box__show btn" id="show">Show</button>
+  </div> -->
