@@ -9,8 +9,8 @@
     <link rel="shortcut icon" href="wallet.ico" type="image/x-icon" />
   </head>
   <body onbeforeunload="save()" onload="load()">
-    <div class="wrapper-registration">
-      <div class="registration">
+    <div class="wrapper-registration" id="wrapper">
+      <div class="registration" id="registration">
         <h2 class="registration__name">Registration</h2>
         <div class="registration__parent registration__username">
           <label
@@ -57,7 +57,355 @@
             from localstorage, otherwise, data'll lose
           </p>
         </div>
-        <button class="registration__confirm primiry-button">Confirm</button>
+        <button
+          class="registration__confirm primiry-button"
+          id="registration-confirm"
+        >
+          Confirm
+        </button>
+      </div>
+      <main class="priceboard">
+        <div class="priceboard__income income-priceboard">
+          <div class="income__main">
+            <div class="income__alltime">
+              <p class="income__alltime-numbers" id="income-alltime">23.159</p>
+              <p class="income__alltime-text">all time</p>
+            </div>
+            <div class="income__today">
+              <p class="income__today-numbers" id="income-today">128</p>
+              <p class="income__today-text">today</p>
+            </div>
+            <div class="income__rest">
+              <p class="income__rest-numbers" id="rest">1982</p>
+              <p class="income__rest-text">rest</p>
+            </div>
+            <div class="income__progress">
+              <div class="income__progress-text">
+                <p>Daily limit</p>
+                <p id="income-progress-limit">128/1200</p>
+              </div>
+              <div
+                style="
+                  width: 100%;
+                  height: 8px;
+                  background-color: #9e9e9e;
+                  border-radius: 100px;
+                  position: relative;
+                "
+              >
+                <div
+                  class="income__progress-bar"
+                  id="income-progress-bar"
+                ></div>
+              </div>
+            </div>
+          </div>
+          <div class="income__divider"></div>
+        </div>
+        <!-- expense but i did same class names because there is no any reason to change them -->
+        <div class="priceboard__income expense-priceboard">
+          <div class="income__main">
+            <div class="income__alltime">
+              <p class="income__alltime-numbers" id="expense-alltime">23.159</p>
+              <p class="income__alltime-text">all time</p>
+            </div>
+            <div class="income__today">
+              <p class="income__today-numbers" id="expense-today">128</p>
+              <p class="income__today-text">today</p>
+            </div>
+            <div class="income__rest">
+              <p class="income__rest-numbers" id="rest">1982</p>
+              <p class="income__rest-text">rest</p>
+            </div>
+            <div class="income__progress">
+              <div class="expense__progress-text">
+                <p>Daily limit</p>
+                <p id="expense-progress-limit">128/1200</p>
+              </div>
+              <div
+                style="
+                  width: 100%;
+                  height: 8px;
+                  background-color: #9e9e9e;
+                  border-radius: 100px;
+                  position: relative;
+                "
+              >
+                <div
+                  class="income__progress-bar"
+                  id="expense-progress-bar"
+                ></div>
+              </div>
+            </div>
+          </div>
+          <div class="income__divider"></div>
+        </div>
+        <div class="priceboard__time time">
+          <p class="time__date" id="time-date">01/09/2023</p>
+          <p class="time__hour" id="time-hour">09:41</p>
+        </div>
+      </main>
+      <div class="cards">
+        <!-- ! income card -->
+        <div class="cards__pricecard" id="cards-income">
+          <div class="pricecard__main">
+            <div class="pricecard__inputs">
+              <div class="pricecard__input">
+                <label
+                  for="pricecard-income-amount"
+                  class="pricecard__input-label"
+                  >income amount:</label
+                >
+                <input
+                  type="text"
+                  id="pricecard-income-amount"
+                  class="pricecard__input-input"
+                  placeholder="type here..."
+                />
+              </div>
+              <div class="pricecard__input">
+                <label
+                  for="pricecard-income-desc"
+                  class="pricecard__input-label"
+                  >income description:</label
+                >
+                <input
+                  type="text"
+                  id="pricecard-income-desc"
+                  class="pricecard__input-input"
+                  placeholder="type here..."
+                />
+              </div>
+            </div>
+            <div class="pricecard__buttons">
+              <button class="cancel-btn">Cancel</button>
+              <button class="add-btn">Add</button>
+            </div>
+          </div>
+          <div class="pricecard__divider"></div>
+          <div class="pricecard__list">
+            <p class="list__title">Recently added<span>(income)</span></p>
+            <ul class="list__list-wrapper">
+              <li class="list__item">
+                <p class="list__item-amount">120</p>
+                <div class="list__item-divider"></div>
+                <p class="list__item-date">21/08/2023</p>
+                <div class="list__item-divider"></div>
+                <p class="list__item-desc">i sold all my books and</p>
+              </li>
+              <li class="list__item">
+                <p class="list__item-amount">120</p>
+                <div class="list__item-divider"></div>
+                <p class="list__item-date">21/08/2023</p>
+                <div class="list__item-divider"></div>
+                <p class="list__item-desc">i sold all my books and</p>
+              </li>
+              <li class="list__item">
+                <p class="list__item-amount">120</p>
+                <div class="list__item-divider"></div>
+                <p class="list__item-date">21/08/2023</p>
+                <div class="list__item-divider"></div>
+                <p class="list__item-desc">i sold all my books and</p>
+              </li>
+              <li class="list__item">
+                <p class="list__item-amount">120</p>
+                <div class="list__item-divider"></div>
+                <p class="list__item-date">21/08/2023</p>
+                <div class="list__item-divider"></div>
+                <p class="list__item-desc">i sold all my books and</p>
+              </li>
+              <li class="list__item">
+                <p class="list__item-amount">120</p>
+                <div class="list__item-divider"></div>
+                <p class="list__item-date">21/08/2023</p>
+                <div class="list__item-divider"></div>
+                <p class="list__item-desc">i sold all my books and</p>
+              </li>
+              <li class="list__item">
+                <p class="list__item-amount">120</p>
+                <div class="list__item-divider"></div>
+                <p class="list__item-date">21/08/2023</p>
+                <div class="list__item-divider"></div>
+                <p class="list__item-desc">i sold all my books and</p>
+              </li>
+              <li class="list__item">
+                <p class="list__item-amount">120</p>
+                <div class="list__item-divider"></div>
+                <p class="list__item-date">21/08/2023</p>
+                <div class="list__item-divider"></div>
+                <p class="list__item-desc">i sold all my books and</p>
+              </li>
+              <li class="list__item">
+                <p class="list__item-amount">120</p>
+                <div class="list__item-divider"></div>
+                <p class="list__item-date">21/08/2023</p>
+                <div class="list__item-divider"></div>
+                <p class="list__item-desc">i sold all my books and</p>
+              </li>
+              <li class="list__item">
+                <p class="list__item-amount">120</p>
+                <div class="list__item-divider"></div>
+                <p class="list__item-date">21/08/2023</p>
+                <div class="list__item-divider"></div>
+                <p class="list__item-desc">i sold all my books and</p>
+              </li>
+              <li class="list__item">
+                <p class="list__item-amount">120</p>
+                <div class="list__item-divider"></div>
+                <p class="list__item-date">21/08/2023</p>
+                <div class="list__item-divider"></div>
+                <p class="list__item-desc">i sold all my books and</p>
+              </li>
+              <li class="list__item">
+                <p class="list__item-amount">120</p>
+                <div class="list__item-divider"></div>
+                <p class="list__item-date">21/08/2023</p>
+                <div class="list__item-divider"></div>
+                <p class="list__item-desc">i sold all my books and</p>
+              </li>
+              <li class="list__item">
+                <p class="list__item-amount">120</p>
+                <div class="list__item-divider"></div>
+                <p class="list__item-date">21/08/2023</p>
+                <div class="list__item-divider"></div>
+                <p class="list__item-desc">i sold all my books and</p>
+              </li>
+              <li class="list__item">
+                <p class="list__item-amount">120</p>
+                <div class="list__item-divider"></div>
+                <p class="list__item-date">21/08/2023</p>
+                <div class="list__item-divider"></div>
+                <p class="list__item-desc">i sold all my books and</p>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <!-- ! expense card -->
+        <div class="cards__pricecard" id="cards-expense">
+          <div class="pricecard__main">
+            <div class="pricecard__inputs">
+              <div class="pricecard__input">
+                <label
+                  for="pricecard-expense-amount"
+                  class="pricecard__input-label"
+                  >expense amount:</label
+                >
+                <input
+                  type="text"
+                  id="pricecard-expense-amount"
+                  class="pricecard__input-input"
+                  placeholder="type here..."
+                />
+              </div>
+              <div class="pricecard__input">
+                <label
+                  for="pricecard-expense-desc"
+                  class="pricecard__input-label"
+                  >expense description:</label
+                >
+                <input
+                  type="text"
+                  id="pricecard-expense-desc"
+                  class="pricecard__input-input"
+                  placeholder="type here..."
+                />
+              </div>
+            </div>
+            <div class="pricecard__buttons">
+              <button class="cancel-btn">Cancel</button>
+              <button class="add-btn">Add</button>
+            </div>
+          </div>
+
+          <div class="pricecard__divider"></div>
+          <div class="pricecard__list">
+            <p class="list__title">Recently added<span>(expense)</span></p>
+            <ul class="list__list-wrapper">
+              <li class="list__item">
+                <p class="list__item-amount">120</p>
+                <div class="list__item-divider"></div>
+                <p class="list__item-date">21/08/2023</p>
+                <div class="list__item-divider"></div>
+                <p class="list__item-desc">i sold all my books and</p>
+              </li>
+              <li class="list__item">
+                <p class="list__item-amount">120</p>
+                <div class="list__item-divider"></div>
+                <p class="list__item-date">21/08/2023</p>
+                <div class="list__item-divider"></div>
+                <p class="list__item-desc">i sold all my books and</p>
+              </li>
+              <li class="list__item">
+                <p class="list__item-amount">120</p>
+                <div class="list__item-divider"></div>
+                <p class="list__item-date">21/08/2023</p>
+                <div class="list__item-divider"></div>
+                <p class="list__item-desc">i sold all my books and</p>
+              </li>
+              <li class="list__item">
+                <p class="list__item-amount">120</p>
+                <div class="list__item-divider"></div>
+                <p class="list__item-date">21/08/2023</p>
+                <div class="list__item-divider"></div>
+                <p class="list__item-desc">i sold all my books and</p>
+              </li>
+              <li class="list__item">
+                <p class="list__item-amount">120</p>
+                <div class="list__item-divider"></div>
+                <p class="list__item-date">21/08/2023</p>
+                <div class="list__item-divider"></div>
+                <p class="list__item-desc">i sold all my books and</p>
+              </li>
+              <li class="list__item">
+                <p class="list__item-amount">120</p>
+                <div class="list__item-divider"></div>
+                <p class="list__item-date">21/08/2023</p>
+                <div class="list__item-divider"></div>
+                <p class="list__item-desc">i sold all my books and</p>
+              </li>
+              <li class="list__item">
+                <p class="list__item-amount">120</p>
+                <div class="list__item-divider"></div>
+                <p class="list__item-date">21/08/2023</p>
+                <div class="list__item-divider"></div>
+                <p class="list__item-desc">i sold all my books and</p>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="cards__user">
+          <div class="user__profile">
+            <div class="profile__image-container">
+              <img src="person.svg" class="profile__image" />
+            </div>
+            <p class="profile__username" id="username">Username</p>
+          </div>
+          <div class="user__cards">
+            <div class="cards__card" id="started-at">
+              <p class="card__title">started at</p>
+              <p class="card__desc">12/01/2022</p>
+            </div>
+            <div class="cards__card" id="notes">
+              <p class="card__title">notes</p>
+              <p class="card__desc">200</p>
+            </div>
+            <div class="cards__card" id="best-income">
+              <p class="card__title">best income</p>
+              <p class="card__desc">2000.12</p>
+            </div>
+            <div class="cards__card" id="worst-expense">
+              <p class="card__title">worst expense</p>
+              <p class="card__desc">1289</p>
+            </div>
+          </div>
+          <div class="user__buttons">
+            <div class="user__buttons-primiry">
+              <button class="add-btn">set income limit</button>
+              <button class="add-btn">set expense limit</button>
+            </div>
+            <button class="cancel-btn">delete all</button>
+          </div>
+        </div>
       </div>
     </div>
     <script src="script.js"></script>

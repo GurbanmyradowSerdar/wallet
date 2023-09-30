@@ -231,3 +231,20 @@ function load() {
   let firstVisit = JSON.parse(localStorage.getItem("isFirstVisit"));
   if (firstVisit !== null && firstVisit === true) isFirstVisit = true;
 }
+
+// ! onClick confirm button in registration
+document
+  .getElementById("registration-confirm")
+  .addEventListener("click", function () {
+    let registration = document.getElementById("registration"),
+      wrapper = document.getElementById("wrapper");
+    (priceCard = document.querySelector(".priceboard")),
+      (cards = document.querySelector(".cards")),
+      (registration.className = "registration-hide");
+    setTimeout(() => {
+      registration.style.display = "none";
+      wrapper.className = "wrapper-dashboard";
+      cards.style.display = "grid";
+      priceCard.style.display = "grid";
+    }, 1000);
+  });
