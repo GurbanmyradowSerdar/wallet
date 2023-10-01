@@ -17,11 +17,6 @@ body {
   color: white;
 }
 
-.wrapper-usual {
-  min-height: 100vh;
-  background-color: #101554;
-}
-
 /* !global vars start */
 
 :root {
@@ -47,7 +42,7 @@ body {
 
 .registration__label {
   font-size: 1.6em;
-  color: var(--grayColorFont);
+  color: white;
   margin-left: 5px;
 }
 .registration__parent {
@@ -77,7 +72,10 @@ input {
 }
 
 input::placeholder {
-  color: white;
+  color: var(--grayColorFont);
+}
+input:focus {
+  outline: 2px solid white;
 }
 .cancel-btn {
   background-color: var(--primaryRed);
@@ -113,15 +111,6 @@ input::placeholder {
 
 /* ! registration start*/
 
-.wrapper-registration {
-  min-height: 100vh;
-  background-color: #101554;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-  overflow: hidden;
-}
 .registration {
   background-color: var(--borderColorPrimary);
   display: flex;
@@ -130,8 +119,10 @@ input::placeholder {
   font-size: 10px;
   max-width: 338px;
   gap: 10px;
-  position: relative;
-  bottom: 0px;
+  position: absolute;
+  top: 43%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   opacity: 1;
 }
 .registration-hide {
@@ -142,9 +133,11 @@ input::placeholder {
   font-size: 10px;
   max-width: 338px;
   gap: 10px;
-  position: relative;
-  bottom: -800px;
-  transition: all 1s;
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  transition: all 0.8s;
   opacity: 0;
 }
 
@@ -205,18 +198,22 @@ input::placeholder {
   display: flex;
   flex-direction: column;
   gap: 20px;
+  position: relative;
 }
 
 /* ! the up side content start */
 
 .priceboard {
-  display: none;
+  display: grid;
   grid-template-areas: "priceboard-income priceboard-expense time";
   grid-template-columns: 33% 33% 34%;
   background-color: var(--backgroundcolorofcards);
   border: 1px solid var(--borderColorPrimary);
   font-size: 10px;
   padding: 18px 0px;
+  visibility: hidden;
+  opacity: 0;
+
   .income-priceboard {
     grid-area: priceboard-income;
   }
@@ -312,6 +309,7 @@ input::placeholder {
     position: absolute;
     top: 0;
     left: 0;
+    animation: all 1s;
   }
   #expense-progress-bar {
     background-color: #ff0000;
@@ -352,10 +350,12 @@ input::placeholder {
 /* ! the cards content start */
 
 .cards {
-  display: none;
+  display: grid;
   grid-template-areas: "cards-income cards-expense cards__card";
   grid-template-columns: 33% 33% 34%;
   flex: 1 1 100%;
+  visibility: hidden;
+  opacity: 0;
 
   #cards-income {
     grid-area: cards-income;
@@ -390,7 +390,7 @@ input::placeholder {
   }
   .pricecard__input-label {
     font-size: 0.9em;
-    color: var(--grayColorFont);
+    color: white;
     margin-left: 12px;
   }
   .pricecard__input-input {
@@ -399,6 +399,11 @@ input::placeholder {
     border: 1px solid white;
     border-radius: var(--borderRadiusPrimary);
     font-size: 1.1em;
+  }
+
+  .pricecard__input-input:focus {
+    background-color: #22276f;
+    outline: 1px solid white;
   }
 
   .pricecard__buttons {
@@ -524,7 +529,7 @@ input::placeholder {
     gap: 25px;
   }
   .card__title {
-    font-size: 1.7em;
+    font-size: 1.5em;
     color: var(--grayColorFont);
     flex: 1 0 0px;
   }
@@ -546,3 +551,16 @@ input::placeholder {
 }
 
 /* ! the cards content end */
+
+/* ! keyframes start */
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* ! keyframes end */
