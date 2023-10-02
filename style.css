@@ -544,9 +544,75 @@ input:focus {
     align-items: start;
     gap: 15px;
   }
+  .set-limit-hidden {
+    padding: 11px 12px;
+    background-color: transparent;
+    border: 1px solid white;
+    border-radius: var(--borderRadiusPrimary);
+    font-size: 1.1em;
+    max-width: 0%;
+    display: none;
+  }
+  .set-limit-active {
+    padding: 14px 18px;
+    background-color: transparent;
+    border: 1px solid white;
+    border-radius: var(--borderRadiusPrimary);
+    font-size: 1.1em;
+    height: 32px;
+    display: block;
+    animation: limit-set forwards linear 0.5s;
+  }
+
+  .set-limit-active:focus {
+    background-color: #22276f;
+    outline: 1px solid white;
+  }
   .user__buttons-primiry {
     display: flex;
     gap: 10px;
+    flex-wrap: wrap;
+  }
+
+  .cancel-btn-hidden {
+    background-color: var(--primaryRed);
+    padding: 8px 15px;
+    color: white;
+    border-radius: 8px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    display: none;
+  }
+  .add-btn-hidden {
+    background-color: var(--primaryBlue);
+    padding: 8px 15px;
+    color: white;
+    border-radius: 8px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    display: none;
+  }
+  .cancel-btn-active {
+    background-color: var(--primaryRed);
+    padding: 8px 15px;
+    color: white;
+    border-radius: 8px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    animation: limit-set forwards linear 0.5s;
+  }
+  .add-btn-active {
+    background-color: var(--primaryBlue);
+    padding: 8px 15px;
+    color: white;
+    border-radius: 8px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    animation: limit-set forwards linear 0.5s;
   }
 }
 
@@ -559,6 +625,17 @@ input:focus {
     opacity: 0;
   }
   to {
+    opacity: 1;
+  }
+}
+
+@keyframes limit-set {
+  from {
+    max-width: 0%;
+    opacity: 0;
+  }
+  to {
+    max-width: 100%;
     opacity: 1;
   }
 }

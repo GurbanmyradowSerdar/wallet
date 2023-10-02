@@ -82,6 +82,8 @@ function load() {
         cards.style.visibility = "visible";
         priceCard.style.animation = "fade-in 0.8s ease-in-out forwards";
         cards.style.animation = "fade-in 0.8s ease-in-out forwards";
+        // ! i have some issue my js not working after code above, i use this for solution
+        location.reload();
 
         setTimeout(() => {
           registration.style.display = "none";
@@ -259,9 +261,124 @@ function setUserProfileCardDetails() {
           return obj.money > max ? obj.money : max;
         }, 0);
 
-  setIncomeLimit;
-  setExpenseLimit;
-  deleteAll.onclick = function (e) {};
+  let parentOfButtons = document.querySelector(".user__buttons-primiry"),
+    okButton = parentOfButtons.children.item(1),
+    cancelButton = parentOfButtons.children.item(2);
+
+  // ! income limit buttons
+  setIncomeLimit.onclick = function (e) {
+    let input = document.getElementById("income-limit-user");
+
+    okButton.className = "add-btn-active";
+    cancelButton.className = "cancel-btn-active";
+
+    this.style.display = "none";
+    setExpenseLimit.style.display = "none";
+
+    input.placeholder = "income limit... 120";
+    input.classList = "set-limit-active";
+
+    // ! ok and cancel click handlers
+    okButton.onclick = function (e) {
+      if (input.value.length > 0 && !isNaN(input.value)) {
+        localStorage.setItem("incomeLimit", input.value);
+        input.value = "";
+
+        okButton.className = "add-btn-hidden";
+        cancelButton.className = "cancel-btn-hidden";
+
+        setIncomeLimit.style.display = "block";
+        setExpenseLimit.style.display = "block";
+
+        input.placeholder = "";
+        input.classList = "set-limit-hidden";
+      }
+    };
+
+    cancelButton.onclick = function (e) {
+      okButton.className = "add-btn-hidden";
+      cancelButton.className = "cancel-btn-hidden";
+
+      setIncomeLimit.style.display = "block";
+      setExpenseLimit.style.display = "block";
+
+      input.placeholder = "";
+      input.classList = "set-limit-hidden";
+
+      input.value = "";
+    };
+  };
+
+  // ! expense limit buttons
+  setExpenseLimit.onclick = function (e) {
+    let input = document.getElementById("income-limit-user");
+
+    okButton.className = "add-btn-active";
+    cancelButton.className = "cancel-btn-active";
+
+    this.style.display = "none";
+    setIncomeLimit.style.display = "none";
+
+    input.placeholder = "expense limit... 120";
+    input.classList = "set-limit-active";
+
+    // ! ok and cancel click handlers
+    okButton.onclick = function (e) {
+      if (input.value.length > 0 && !isNaN(input.value)) {
+        localStorage.setItem("expenseLimit", input.value);
+        input.value = "";
+
+        okButton.className = "add-btn-hidden";
+        cancelButton.className = "cancel-btn-hidden";
+
+        setIncomeLimit.style.display = "block";
+        setExpenseLimit.style.display = "block";
+
+        input.placeholder = "";
+        input.classList = "set-limit-hidden";
+      }
+    };
+
+    cancelButton.onclick = function (e) {
+      okButton.className = "add-btn-hidden";
+      cancelButton.className = "cancel-btn-hidden";
+
+      setIncomeLimit.style.display = "block";
+      setExpenseLimit.style.display = "block";
+
+      input.placeholder = "";
+      input.classList = "set-limit-hidden";
+
+      input.value = "";
+    };
+  };
+
+  // ! delete all button
+  deleteAll.onclick = function (e) {
+    if (confirm("are you sure to delete all data?")) {
+      let priceCard = document.querySelector(".priceboard"),
+        cards = document.querySelector(".cards"),
+        registration = document.getElementById("registration");
+
+      registration.style.display = "flex";
+      document.body.style.overflow = "hidden";
+      priceCard.style.visibility = "hidden";
+      cards.style.visibility = "hidden";
+
+      // ? nulling local storage
+      localStorage.removeItem("username");
+      localStorage.removeItem("incomeLimit");
+      localStorage.removeItem("expenseLimit");
+      localStorage.removeItem("isLogined");
+      localStorage.removeItem("startedAt");
+      localStorage.removeItem("inArr");
+      localStorage.removeItem("outArr");
+
+      // ! i have some issue my js not working after code above, i use this for solution
+      location.reload();
+    } else {
+    }
+  };
 }
 
 // ! set in cards details
