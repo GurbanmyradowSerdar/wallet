@@ -50,7 +50,7 @@ body {
   flex-direction: column;
   gap: 3px;
 }
-.primiry-button {
+.primary-button {
   padding: 8px 15px;
   border-radius: 9px;
   outline: none;
@@ -62,8 +62,11 @@ body {
   overflow: hidden;
   position: relative;
 }
-.primiry-button:hover {
+.primary-button:hover {
   background-color: #005993;
+}
+.primary-button:focus-visible {
+  outline: 2px white solid;
 }
 
 input {
@@ -92,6 +95,9 @@ input:focus {
 .cancel-btn:active {
   background-color: #bb0000;
 }
+.cancel-btn:focus-visible {
+  outline: 2px solid white;
+}
 .add-btn {
   background-color: var(--primaryBlue);
   padding: 8px 15px;
@@ -106,6 +112,9 @@ input:focus {
 }
 .add-btn:active {
   background-color: #004e82;
+}
+.add-btn:focus-visible {
+  outline: 2px solid white;
 }
 /* ! common used styles end*/
 
@@ -305,7 +314,7 @@ input:focus {
     background-color: #00ff6d;
     height: 8px;
     border-radius: 100px;
-    width: 14%;
+    width: 0%;
     position: absolute;
     top: 0;
     left: 0;
@@ -315,7 +324,7 @@ input:focus {
     background-color: #ff0000;
     height: 8px;
     border-radius: 100px;
-    width: 23%;
+    width: 0%;
     position: absolute;
     top: 0;
     left: 0;
@@ -434,7 +443,7 @@ input:focus {
     display: flex;
     flex-direction: column;
     flex: 1 0 0px;
-    overflow-y: scroll;
+    overflow-y: auto;
     gap: 10px;
     padding-right: 12px;
   }
@@ -462,6 +471,8 @@ input:focus {
     padding: 10px 6px;
     font-size: 1.7em;
     font-weight: 700;
+    flex: 0 0 15%;
+    overflow: hidden;
   }
   .list__item-divider {
     width: 2px;

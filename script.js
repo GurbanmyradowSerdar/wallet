@@ -8,8 +8,7 @@ class In {
     this.date = date;
   }
 }
-let inArr = [];
-let outArr = [];
+
 class Out {
   text;
   money;
@@ -20,24 +19,21 @@ class Out {
     this.date = date;
   }
 }
+let inArr = [];
+let outArr = [];
 
-// Set values in localStorage ///////////////////////////////////////////////////////
+// ! Set values in localStorage ///////////////////////////////////////////////////////
 function save() {
-  if (result > 0) {
-    window.localStorage.setItem("result", JSON.stringify(result));
-  }
   if (inArr.length > 0) {
-    window.localStorage.setItem("inArr", JSON.stringify(inArr));
+    localStorage.setItem("inArr", JSON.stringify(inArr));
   }
   if (outArr.length > 0) {
-    window.localStorage.setItem("outArr", JSON.stringify(outArr));
+    localStorage.setItem("outArr", JSON.stringify(outArr));
   }
 }
 
 //! Get values in localStorage and loading dashboard ///////////////////////////////////////////////////////
 function load() {
-  result = Number(getItemFromLocalStorage("result"));
-
   let i = getItemFromLocalStorage("inArr");
   if (i !== null) inArr = JSON.parse(i);
 
@@ -82,20 +78,26 @@ function load() {
         cards.style.visibility = "visible";
         priceCard.style.animation = "fade-in 0.8s ease-in-out forwards";
         cards.style.animation = "fade-in 0.8s ease-in-out forwards";
-        // ! i have some issue my js not working after code above, i use this for solution
-        location.reload();
 
         setTimeout(() => {
           registration.style.display = "none";
           document.body.style.overflow = "auto";
         }, 800);
+        // ! putting data to ui
+        // ! time
+        setTime();
+        // ! priceBoards details
+        setPriceBoardsDetails();
+        // ! user profile
+        setUserProfileCardDetails();
+        // ! in and out cards
+        setInCardDetails();
+        setOutCardDetails();
       } else {
       }
     });
   }
 }
-
-// ! onClick confirm button in registration
 
 // ! validation of registration
 function registerValidator() {
@@ -160,7 +162,10 @@ function setPriceBoardsDetails() {
     incomeProgress = document.getElementById("income-progress-limit"),
     incomeProgressBar = document.getElementById("income-progress-bar"),
     rest = document.querySelectorAll(".rest"),
-    date = new Date();
+    date = new Date(),
+    todaysDate = `${date.getDate()}/${
+      date.getMonth() + 1
+    }/${date.getFullYear()}`;
 
   let incomeAllTimeCurrent = 0,
     incomeTodayCurrent = 0,
@@ -183,27 +188,27 @@ function setPriceBoardsDetails() {
     expenseLimit = getItemFromLocalStorage("expenseLimit");
 
   // ! calculating income priceBoard
-  if (!isNull(getItemFromLocalStorage("inArr"))) {
-    let parsedArr = JSON.parse(getItemFromLocalStorage("inArr"));
-    incomeAllTimeCurrent = parsedArr.reduce(
-      (prev, cur) => prev.money + cur.money,
+  if (inArr.length > 0) {
+    incomeAllTimeCurrent = inArr.reduce(
+      (prev, cur) => prev + Number(cur.money),
       0
     );
-    incomeTodayCurrent = parsedArr
-      .filter((item) => item.date === date.getDate())
-      .reduce((prev, cur) => prev.money + cur.momey, 0);
+
+    incomeTodayCurrent = inArr
+      .filter((item) => item.date === todaysDate)
+      .reduce((prev, cur) => prev + Number(cur.money), 0);
   }
 
   // ! calculating expense priceBoard
-  if (!isNull(getItemFromLocalStorage("outArr"))) {
-    let parsedArr = JSON.parse(getItemFromLocalStorage("outArr"));
-    expenseAllTimeCurrent = parsedArr.reduce(
-      (prev, cur) => prev.money + cur.money,
+  if (outArr.length > 0) {
+    expenseAllTimeCurrent = outArr.reduce(
+      (prev, cur) => prev + Number(cur.money),
       0
     );
-    expenseTodayCurrent = parsedArr
-      .filter((item) => item.date === date.getDate())
-      .reduce((prev, cur) => prev.money + cur.momey, 0);
+
+    expenseTodayCurrent = outArr
+      .filter((item) => item.date === todaysDate)
+      .reduce((prev, cur) => prev + Number(cur.money), 0);
   }
 
   restCurrent = incomeAllTimeCurrent - expenseAllTimeCurrent;
@@ -235,36 +240,128 @@ function setUserProfileCardDetails() {
     notes = document.getElementById("notes"),
     bestIncome = document.getElementById("best-income"),
     worstExpense = document.getElementById("worst-expense"),
-    setIncomeLimit = document.getElementById("set-income-limit"),
-    setExpenseLimit = document.getElementById("set-expense-limit"),
-    deleteAll = document.getElementById("delete-all");
-
-  let inArray = JSON.parse(getItemFromLocalStorage("inArr")),
-    outArray = JSON.parse(getItemFromLocalStorage("outArr"));
+    n = 0;
 
   // ! setting data to ui
   username.innerText = getItemFromLocalStorage("username");
   startedAt.children.item(1).innerText = getItemFromLocalStorage("startedAt");
-  notes.children.item(1).innerText =
-    isNull(inArray) && isNull(outArray) ? 0 : inArray.length + outArray.length;
+
+  // ! notes
+  n += inArr.length > 0 ? inArr.length : 0;
+  n += outArr.length > 0 ? outArr.length : 0;
+  notes.children.item(1).innerText = n;
+
+  // ! best income
   bestIncome.children.item(1).innerText =
-    isNull(inArray) && isNull(outArray)
-      ? 0
-      : inArray.reduce(function (max, obj) {
-          return obj.money > max ? obj.money : max;
-        }, 0);
+    inArr.length > 0 ? Math.max(...inArr.map((item) => Number(item.money))) : 0;
 
+  // ! worst expense
   worstExpense.children.item(1).innerText =
-    isNull(inArray) && isNull(outArray)
-      ? 0
-      : outArray.reduce(function (max, obj) {
-          return obj.money > max ? obj.money : max;
-        }, 0);
+    outArr.length > 0
+      ? Math.max(...outArr.map((item) => Number(item.money)))
+      : 0;
+}
 
-  let parentOfButtons = document.querySelector(".user__buttons-primiry"),
+// ! set in cards details
+function setInCardDetails() {
+  let listParent = document.getElementById("list__list-wrapper-income");
+
+  // ! remove previous children from list
+  while (listParent.firstChild) {
+    listParent.removeChild(listParent.firstChild);
+  }
+
+  // ! putting data to ui (to list)
+  if (inArr.length > 0) {
+    inArr.forEach((item, index) => {
+      // ! creating dom elements
+      let li = document.createElement("li"),
+        amount = document.createElement("p"),
+        divider = document.createElement("div"),
+        date = document.createElement("p"),
+        description = document.createElement("p");
+
+      // ! setting attributes to them
+      li.className = "list__item";
+      amount.className = "list__item-amount";
+      divider.className = "list__item-divider";
+      date.className = "list__item-date";
+      description.className = "list__item-desc";
+
+      // ! setting theirs content
+      amount.innerText = item.money;
+      date.innerText = item.date;
+      description.innerText = item.text;
+
+      // ! adding elements into dom
+      li.append(amount, divider.cloneNode(true), date, divider, description);
+      listParent.append(li);
+    });
+  }
+}
+
+// ! set out cards details
+function setOutCardDetails() {
+  let listParent = document.getElementById("list__list-wrapper-expense");
+
+  // ! remove previous children from list
+  while (listParent.firstChild) {
+    listParent.removeChild(listParent.firstChild);
+  }
+
+  // ! putting data to ui (to list)
+  if (outArr.length > 0) {
+    outArr.forEach((item, index) => {
+      // ! creating dom elements
+      let li = document.createElement("li"),
+        amount = document.createElement("p"),
+        divider = document.createElement("div"),
+        date = document.createElement("p"),
+        description = document.createElement("p");
+
+      // ! setting attributes to them
+      li.className = "list__item";
+      amount.className = "list__item-amount";
+      divider.className = "list__item-divider";
+      date.className = "list__item-date";
+      description.className = "list__item-desc";
+
+      // ! setting theirs content
+      amount.innerText = item.money;
+      date.innerText = item.date;
+      description.innerText = item.text;
+
+      // ! adding elements into dom
+      li.append(amount, divider.cloneNode(true), date, divider, description);
+      listParent.append(li);
+    });
+  }
+}
+
+// !isNull cheker
+function isNull(value) {
+  if (value === null) return true;
+  return false;
+}
+
+// !calculating precent for progress bars
+function calculatePercent(number, maxValue) {
+  return (number / maxValue) * 100;
+}
+
+// ! get local storage item via key
+function getItemFromLocalStorage(key) {
+  return localStorage.getItem(key);
+}
+
+// ! user cards buttons handlers
+{
+  let setIncomeLimit = document.getElementById("set-income-limit"),
+    setExpenseLimit = document.getElementById("set-expense-limit"),
+    deleteAll = document.getElementById("delete-all"),
+    parentOfButtons = document.querySelector(".user__buttons-primiry"),
     okButton = parentOfButtons.children.item(1),
     cancelButton = parentOfButtons.children.item(2);
-
   // ! income limit buttons
   setIncomeLimit.onclick = function (e) {
     let input = document.getElementById("income-limit-user");
@@ -292,6 +389,9 @@ function setUserProfileCardDetails() {
 
         input.placeholder = "";
         input.classList = "set-limit-hidden";
+
+        // ! recalculating data and updating ui
+        setPriceBoardsDetails();
       }
     };
 
@@ -336,6 +436,9 @@ function setUserProfileCardDetails() {
 
         input.placeholder = "";
         input.classList = "set-limit-hidden";
+
+        // ! recalculating data and updating ui
+        setPriceBoardsDetails();
       }
     };
 
@@ -373,6 +476,8 @@ function setUserProfileCardDetails() {
       localStorage.removeItem("startedAt");
       localStorage.removeItem("inArr");
       localStorage.removeItem("outArr");
+      inArr = [];
+      outArr = [];
 
       // ! i have some issue my js not working after code above, i use this for solution
       location.reload();
@@ -381,13 +486,12 @@ function setUserProfileCardDetails() {
   };
 }
 
-// ! set in cards details
-function setInCardDetails() {
+// ! income inputs buttons handlers
+{
   let incomeAmount = document.getElementById("pricecard-income-amount"),
     incomeDesc = document.getElementById("pricecard-income-desc"),
     incomeCancel = document.getElementById("pricecard-in-cancel"),
     incomeAdd = document.getElementById("pricecard-in-add");
-
   // ! validation add
   incomeAdd.onclick = function (e) {
     if (
@@ -409,6 +513,11 @@ function setInCardDetails() {
       );
       incomeAmount.value = "";
       incomeDesc.value = "";
+
+      // ! recalculating data and updating ui
+      setInCardDetails();
+      setPriceBoardsDetails();
+      setUserProfileCardDetails();
     } else {
       incomeAmount.parentElement.children.item(0).style.color = "red";
       incomeDesc.parentElement.children.item(0).style.color = "red";
@@ -423,8 +532,8 @@ function setInCardDetails() {
   };
 }
 
-// ! set out cards details
-function setOutCardDetails() {
+// ! expense inputs buttons handlers
+{
   let expenseAmount = document.getElementById("pricecard-expense-amount"),
     expenseDesc = document.getElementById("pricecard-expense-desc"),
     expenseCancel = document.getElementById("pricecard-out-cancel"),
@@ -451,6 +560,10 @@ function setOutCardDetails() {
       );
       expenseAmount.value = "";
       expenseDesc.value = "";
+      // ! recalculating data and updating ui
+      setOutCardDetails();
+      setPriceBoardsDetails();
+      setUserProfileCardDetails();
     } else {
       expenseAmount.parentElement.children.item(0).style.color = "red";
       expenseDesc.parentElement.children.item(0).style.color = "red";
@@ -463,19 +576,4 @@ function setOutCardDetails() {
     expenseAmount.parentElement.children.item(0).style.color = "white";
     expenseDesc.parentElement.children.item(0).style.color = "white";
   };
-}
-// !isNull cheker
-function isNull(value) {
-  if (value === null) return true;
-  return false;
-}
-
-// !calculating precent for progress bars
-function calculatePercent(number, maxValue) {
-  return (number / maxValue) * 100;
-}
-
-// ! get local storage item via key
-function getItemFromLocalStorage(key) {
-  return localStorage.getItem(key);
 }
