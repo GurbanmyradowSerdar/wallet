@@ -273,7 +273,7 @@ function setInCardDetails() {
 
   // ! putting data to ui (to list)
   if (inArr.length > 0) {
-    inArr.forEach((item, index) => {
+    inArr.reverse().forEach((item, index) => {
       // ! creating dom elements
       let li = document.createElement("li"),
         amount = document.createElement("p"),
@@ -282,7 +282,7 @@ function setInCardDetails() {
         description = document.createElement("p");
 
       // ! setting attributes to them
-      li.className = "list__item";
+      li.className = "list__item in";
       amount.className = "list__item-amount";
       divider.className = "list__item-divider";
       date.className = "list__item-date";
@@ -296,7 +296,13 @@ function setInCardDetails() {
       // ! adding elements into dom
       li.append(amount, divider.cloneNode(true), date, divider, description);
       listParent.append(li);
+
+      // ! show popup when clicked
+      li.onclick = function (e) {
+        showPopup(this);
+      };
     });
+    inArr.reverse();
   }
 }
 
@@ -311,7 +317,7 @@ function setOutCardDetails() {
 
   // ! putting data to ui (to list)
   if (outArr.length > 0) {
-    outArr.forEach((item, index) => {
+    outArr.reverse().forEach((item, index) => {
       // ! creating dom elements
       let li = document.createElement("li"),
         amount = document.createElement("p"),
@@ -320,7 +326,7 @@ function setOutCardDetails() {
         description = document.createElement("p");
 
       // ! setting attributes to them
-      li.className = "list__item";
+      li.className = "list__item out";
       amount.className = "list__item-amount";
       divider.className = "list__item-divider";
       date.className = "list__item-date";
@@ -334,7 +340,13 @@ function setOutCardDetails() {
       // ! adding elements into dom
       li.append(amount, divider.cloneNode(true), date, divider, description);
       listParent.append(li);
+
+      // ! show popup when clicked
+      li.onclick = function (e) {
+        showPopup(this);
+      };
     });
+    outArr.reverse();
   }
 }
 
@@ -352,6 +364,73 @@ function calculatePercent(number, maxValue) {
 // ! get local storage item via key
 function getItemFromLocalStorage(key) {
   return localStorage.getItem(key);
+}
+
+// ! onclick list item to show popup
+function showPopup(thisItem) {
+  let popup = document.getElementById("popup"),
+    fade = document.querySelector(".fade"),
+    titleElement = document.getElementById("popup-title"),
+    amountElement = document.getElementById("popup-amount-text"),
+    dateElement = document.getElementById("popup-date-text"),
+    descElement = document.getElementById("popup-desc-text"),
+    deleteElement = document.getElementById("popup-delete"),
+    okElement = document.getElementById("popup-ok"),
+    amount = `${thisItem.children.item(0).innerText}`,
+    date = `${thisItem.children.item(2).innerText}`,
+    desc = `${thisItem.children.item(4).innerText}`;
+
+  // ! implementing ui
+  popup.className = "popup-active";
+  fade.style.display = "block";
+  amountElement.innerText = amount;
+  dateElement.innerText = date;
+  descElement.innerText = desc;
+  thisItem.className.includes("in")
+    ? (titleElement.innerText = "Income")
+    : (titleElement.innerText = "Expense");
+
+  // ! buttons handlers
+  okElement.onclick = function () {
+    popup.className = "popup";
+    fade.style.display = "none";
+  };
+  deleteElement.onclick = function () {
+    let item = {};
+    item.money = amount;
+    item.text = desc;
+    item.date = date;
+
+    if (thisItem.className.includes("in")) {
+      inArr.filter((value, index) => {
+        if (
+          value.money === item.money &&
+          value.date === item.date &&
+          value.text === item.text
+        ) {
+          inArr.splice(index, 1);
+          setInCardDetails();
+          setPriceBoardsDetails();
+          setUserProfileCardDetails();
+        }
+      });
+    } else {
+      outArr.filter((value, index) => {
+        if (
+          value.money === item.money &&
+          value.date === item.date &&
+          value.text === item.text
+        ) {
+          outArr.splice(index, 1);
+          setOutCardDetails();
+          setPriceBoardsDetails();
+          setUserProfileCardDetails();
+        }
+      });
+    }
+    popup.className = "popup";
+    fade.style.display = "none";
+  };
 }
 
 // ! user cards buttons handlers
