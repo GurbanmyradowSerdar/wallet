@@ -95,7 +95,7 @@ input:focus {
   background-color: #004e82;
 }
 .add-btn:focus-visible {
-  outline: 2px solid 1000px;
+  outline: 2px solid white;
 }
 
 @media screen and (max-width: 1000px) {
@@ -227,6 +227,27 @@ input:focus {
   font-size: 2em;
 }
 
+/* ? registration media query 655px */
+@media screen and (max-width: 655px) {
+  .registration {
+    font-size: 8px;
+    max-width: 300px;
+    gap: 7px;
+  }
+  .registration-hide {
+    font-size: 8px;
+    max-width: 300px;
+    gap: 7px;
+  }
+
+  .limits__income {
+    width: 100%;
+  }
+  .limits__expense {
+    width: 100%;
+  }
+}
+
 /* ! registration end */
 
 /* ! main interface start */
@@ -234,7 +255,7 @@ input:focus {
 .wrapper-dashboard {
   min-height: 100vh;
   background-color: #101554;
-  padding: 20px 30px;
+  padding: 20px 20px;
   display: flex;
   flex-direction: column;
   gap: 20px;
@@ -458,6 +479,73 @@ input:focus {
       font-size: 2.1em;
       font-weight: 700;
       color: var(--grayColorFont);
+    }
+  }
+}
+
+/* ? priceboard media query 600px */
+@media screen and (max-width: 600px) {
+  .priceboard {
+    grid-template-areas:
+      "priceboard-income"
+      "priceboard-expense";
+    grid-template-columns: 100%;
+    font-size: 6px;
+    padding: 0px;
+    border: none;
+    background-color: #101554;
+    gap: 20px;
+
+    .income-priceboard {
+      position: relative;
+      background-color: var(--backgroundcolorofcards);
+      border: 1px solid var(--borderColorPrimary);
+      padding: 20px 15px;
+    }
+    .income__main {
+      gap: 15px;
+      padding: 0px;
+    }
+    .expense-priceboard {
+      display: flex;
+      background-color: var(--backgroundcolorofcards);
+      border: 1px solid var(--borderColorPrimary);
+    }
+    .expense__main {
+      align-items: start;
+      padding: 20px 15px;
+      order: 1;
+    }
+    .expense__alltime {
+      flex-direction: row;
+    }
+    .expense__today {
+      flex-direction: row;
+    }
+    .expense__rest {
+      flex-direction: row;
+    }
+    .progress-bar-parent {
+      height: 6px;
+    }
+    .income__progress-bar {
+      height: 6px;
+    }
+    #expense-progress-bar {
+      height: 6px;
+    }
+    .income__divider {
+      display: none;
+    }
+    .priceboard__time {
+      display: flex;
+      flex-direction: column;
+      align-items: end;
+      padding-right: 0px;
+      gap: 3px;
+      position: absolute;
+      right: 15px;
+      top: 20px;
     }
   }
 }
@@ -818,22 +906,22 @@ input:focus {
       padding: 20px 0px;
     }
     .pricecard__main {
-      padding: 0px 30px;
+      padding: 0px 15px;
     }
     .pricecard__buttons {
       gap: 10px;
     }
 
     .pricecard__divider-income {
-      margin-left: 30px;
-      width: calc(100% - 30px);
+      margin-left: 15px;
+      width: calc(100% - 15px);
     }
     .pricecard__divider-expense {
-      margin-right: 30px;
-      width: calc(100% - 30px);
+      margin-right: 15px;
+      width: calc(100% - 15px);
     }
     .pricecard__list {
-      padding: 0px 30px;
+      padding: 0px 15px;
       gap: 15px;
       flex: 1 0 200px;
     }
@@ -868,6 +956,76 @@ input:focus {
     .add-btn-active {
       padding: 5px 10px;
       font-size: 12px;
+    }
+  }
+}
+
+/* ? cards media query 600px */
+@media screen and (max-width: 600px) {
+  .cards {
+    display: grid;
+    grid-template-areas:
+      "cards-income"
+      "cards-expense"
+      "cards__card";
+    grid-template-columns: 100%;
+    font-size: 6px;
+    row-gap: 20px;
+
+    #cards-income {
+      grid-area: cards-income;
+      margin-right: 0px;
+      border-right: 1px solid #6b70ae;
+      position: relative;
+    }
+    #cards-expense {
+      grid-area: cards-expense;
+      margin: 0px 0px;
+      border-left: 1px solid #6b70ae;
+      position: relative;
+    }
+    .pricecard__income-border {
+      display: none;
+    }
+    .pricecard__expense-border {
+      display: none;
+    }
+
+    .cards__pricecard {
+      gap: 25px;
+      padding: 20px 15px;
+    }
+    .pricecard__main {
+      padding: 0px;
+    }
+    .pricecard__buttons {
+      gap: 10px;
+    }
+
+    .pricecard__divider-income {
+      width: 100%;
+      margin: 0px;
+    }
+    .pricecard__divider-expense {
+      width: 100%;
+      margin: 0px;
+    }
+    .pricecard__list {
+      padding: 0px;
+      gap: 15px;
+      flex: 1 0 200px;
+    }
+    .cards__user {
+      grid-area: cards__card;
+      margin-left: 0px;
+      padding: 20px 15px;
+      flex: 0;
+      flex-direction: column;
+      gap: 25px;
+    }
+    .user__profile {
+      flex-direction: column;
+      gap: 15px;
     }
   }
 }
@@ -968,6 +1126,60 @@ input:focus {
   width: 20px;
   height: 20px;
 }
+
+/* ? popup media query 600px */
+@media screen and (max-width: 600px) {
+  .popup-active {
+    gap: 10px;
+    padding: 10px 12px;
+    font-size: 8px;
+    max-width: 280px;
+    min-width: 280px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 10;
+    visibility: visible;
+    opacity: 1;
+    transition: all 0.3s;
+  }
+  .popup {
+    gap: 10px;
+    padding: 10px 12px;
+    font-size: 8px;
+    max-width: 280px;
+    min-width: 280px;
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translate(-50%, 0%);
+    z-index: 10;
+    visibility: hidden;
+    opacity: 0;
+    transition: all 0.3s;
+  }
+  .popup__content {
+    gap: 15px;
+  }
+  .content__amount,
+  .content__date {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 8px;
+  }
+  .content__desc {
+    padding: 12px 8px;
+    max-width: 280px;
+  }
+  .content__desc-text {
+    font-size: 2em;
+    color: white;
+    word-break: break-all;
+  }
+}
+
 /* ! popup end */
 
 /* ! fade start */

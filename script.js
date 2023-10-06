@@ -696,17 +696,21 @@ function showPopup(thisItem) {
 // ! managing the window resize event handler
 {
   function windowResizeTabletHandler() {
-    let windowWidth = window.innerWidth,
+    let windowWidth = window.outerWidth,
       parent = document.querySelector(".cards__user"),
       profileElement = parent.querySelector(".user__profile"),
       buttonsElement = parent.querySelector(".user__buttons"),
       wrapperElement = parent.children.item(0);
 
-    if (windowWidth > 414 && windowWidth <= 1000) {
+    let timeElement = document.querySelector(".priceboard__time"),
+      incomeElement = document.querySelector(".priceboard__income"),
+      priceBoardParent = document.querySelector(".priceboard");
+
+    if (windowWidth > 600 && windowWidth <= 1000) {
       // ! if tablet
       wrapperElement.append(profileElement, buttonsElement);
       wrapperElement.style.display = "flex";
-    } else {
+    } else if (windowWidth > 1000) {
       // ! if not tablet fixing the changes
       parent.insertBefore(profileElement, wrapperElement.nextElementSibling);
       parent.append(buttonsElement);
@@ -714,6 +718,18 @@ function showPopup(thisItem) {
         wrapperElement.removeChild(wrapperElement.firstChild);
       }
       wrapperElement.style.display = "none";
+    }
+
+    if (windowWidth <= 600) {
+      incomeElement.append(timeElement);
+      parent.insertBefore(profileElement, wrapperElement.nextElementSibling);
+      parent.append(buttonsElement);
+      while (wrapperElement.firstChild) {
+        wrapperElement.removeChild(wrapperElement.firstChild);
+      }
+      wrapperElement.style.display = "none";
+    } else if (windowWidth > 600) {
+      priceBoardParent.append(timeElement);
     }
   }
   windowResizeTabletHandler();
