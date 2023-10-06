@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Wallet</title>
     <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="nullingStyle.css" />
     <link rel="shortcut icon" href="wallet.ico" type="image/x-icon" />
   </head>
   <body onbeforeunload="save()" onload="load()" style="overflow: hidden">
@@ -88,15 +89,7 @@
                 <p>Daily limit</p>
                 <p id="income-progress-limit">0/0</p>
               </div>
-              <div
-                style="
-                  width: 100%;
-                  height: 8px;
-                  background-color: #9e9e9e;
-                  border-radius: 100px;
-                  position: relative;
-                "
-              >
+              <div class="progress-bar-parent">
                 <div
                   class="income__progress-bar"
                   id="income-progress-bar"
@@ -108,16 +101,16 @@
         </div>
         <!-- expense but i did same class names because there is no any reason to change them -->
         <div class="priceboard__income expense-priceboard">
-          <div class="income__main">
-            <div class="income__alltime">
+          <div class="income__main expense__main">
+            <div class="income__alltime expense__alltime">
               <p class="income__alltime-numbers" id="expense-alltime">0</p>
               <p class="income__alltime-text">all time</p>
             </div>
-            <div class="income__today">
+            <div class="income__today expense__today">
               <p class="income__today-numbers" id="expense-today">0</p>
               <p class="income__today-text">today</p>
             </div>
-            <div class="income__rest">
+            <div class="income__rest expense__rest">
               <p class="income__rest-numbers rest">0</p>
               <p class="income__rest-text">rest</p>
             </div>
@@ -126,15 +119,7 @@
                 <p>Daily limit</p>
                 <p id="expense-progress-limit">0/0</p>
               </div>
-              <div
-                style="
-                  width: 100%;
-                  height: 8px;
-                  background-color: #9e9e9e;
-                  border-radius: 100px;
-                  position: relative;
-                "
-              >
+              <div class="progress-bar-parent">
                 <div
                   class="income__progress-bar"
                   id="expense-progress-bar"
@@ -142,7 +127,7 @@
               </div>
             </div>
           </div>
-          <div class="income__divider"></div>
+          <div class="income__divider expense__divider"></div>
         </div>
         <div class="priceboard__time time">
           <p class="time__date" id="time-date">00/00/0000</p>
@@ -152,6 +137,7 @@
       <div class="cards">
         <!-- ! income card -->
         <div class="cards__pricecard" id="cards-income">
+          <div class="pricecard__income-border"></div>
           <div class="pricecard__main">
             <div class="pricecard__inputs">
               <div class="pricecard__input">
@@ -178,6 +164,7 @@
                   id="pricecard-income-desc"
                   class="pricecard__input-input"
                   placeholder="earn after delivery..."
+                  maxlength="200"
                 />
               </div>
             </div>
@@ -188,7 +175,7 @@
               <button class="add-btn" id="pricecard-in-add">Add</button>
             </div>
           </div>
-          <div class="pricecard__divider"></div>
+          <div class="pricecard__divider pricecard__divider-income"></div>
           <div class="pricecard__list">
             <p class="list__title">Recently added<span>(income)</span></p>
             <ul class="list__list-wrapper" id="list__list-wrapper-income"></ul>
@@ -196,6 +183,7 @@
         </div>
         <!-- ! expense card -->
         <div class="cards__pricecard" id="cards-expense">
+          <div class="pricecard__expense-border"></div>
           <div class="pricecard__main">
             <div class="pricecard__inputs">
               <div class="pricecard__input">
@@ -222,6 +210,7 @@
                   id="pricecard-expense-desc"
                   class="pricecard__input-input"
                   placeholder="ate food in restaurant..."
+                  maxlength="200"
                 />
               </div>
             </div>
@@ -232,14 +221,23 @@
               <button class="add-btn" id="pricecard-out-add">Add</button>
             </div>
           </div>
-
-          <div class="pricecard__divider"></div>
+          <div class="pricecard__divider pricecard__divider-expense"></div>
           <div class="pricecard__list">
             <p class="list__title">Recently added<span>(expense)</span></p>
             <ul class="list__list-wrapper" id="list__list-wrapper-expense"></ul>
           </div>
         </div>
         <div class="cards__user">
+          <div
+            style="
+              display: none;
+              flex-direction: column;
+              gap: 50px;
+              align-items: start;
+              justify-content: start;
+              flex: 1;
+            "
+          ></div>
           <div class="user__profile">
             <div class="profile__image-container">
               <img src="person.svg" class="profile__image" />

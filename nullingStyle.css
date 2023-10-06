@@ -1,0 +1,18 @@
+* {
+  padding: 0px;
+  margin: 0px;
+  box-sizing: border-box;
+  outline: none;
+  border: none;
+}
+
+ul,
+ol,
+li {
+  list-style: none;
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  color: white;
+}

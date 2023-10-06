@@ -409,6 +409,10 @@ function showPopup(thisItem) {
           value.text === item.text
         ) {
           inArr.splice(index, 1);
+
+          // ! solution for arr is empty but in local storage we have data and it cant be setted because array is empty
+          localStorage.setItem("inArr", JSON.stringify(inArr));
+
           setInCardDetails();
           setPriceBoardsDetails();
           setUserProfileCardDetails();
@@ -422,6 +426,9 @@ function showPopup(thisItem) {
           value.text === item.text
         ) {
           outArr.splice(index, 1);
+          // ! solution for arr is empty but in local storage we have data and it cant be setted because array is empty
+          localStorage.setItem("outArr", JSON.stringify(outArr));
+
           setOutCardDetails();
           setPriceBoardsDetails();
           setUserProfileCardDetails();
@@ -454,8 +461,14 @@ function showPopup(thisItem) {
     input.placeholder = "income limit... 120";
     input.classList = "set-limit-active";
 
-    // ! ok and cancel click handlers
-    okButton.onclick = function (e) {
+    input.focus();
+    input.onkeydown = function (e) {
+      if (e.key === "Enter") {
+        okButtonHandler();
+      }
+    };
+
+    function okButtonHandler() {
       if (input.value.length > 0 && !isNaN(input.value)) {
         localStorage.setItem("incomeLimit", input.value);
         input.value = "";
@@ -472,7 +485,10 @@ function showPopup(thisItem) {
         // ! recalculating data and updating ui
         setPriceBoardsDetails();
       }
-    };
+    }
+
+    // ! ok and cancel click handlers
+    okButton.onclick = okButtonHandler;
 
     cancelButton.onclick = function (e) {
       okButton.className = "add-btn-hidden";
@@ -501,8 +517,14 @@ function showPopup(thisItem) {
     input.placeholder = "expense limit... 120";
     input.classList = "set-limit-active";
 
-    // ! ok and cancel click handlers
-    okButton.onclick = function (e) {
+    input.focus();
+    input.onkeydown = function (e) {
+      if (e.key === "Enter") {
+        okButtonHandler();
+      }
+    };
+
+    function okButtonHandler() {
       if (input.value.length > 0 && !isNaN(input.value)) {
         localStorage.setItem("expenseLimit", input.value);
         input.value = "";
@@ -519,7 +541,10 @@ function showPopup(thisItem) {
         // ! recalculating data and updating ui
         setPriceBoardsDetails();
       }
-    };
+    }
+
+    // ! ok and cancel click handlers
+    okButton.onclick = okButtonHandler;
 
     cancelButton.onclick = function (e) {
       okButton.className = "add-btn-hidden";
@@ -655,4 +680,42 @@ function showPopup(thisItem) {
     expenseAmount.parentElement.children.item(0).style.color = "white";
     expenseDesc.parentElement.children.item(0).style.color = "white";
   };
+}
+
+// ! fade onclick handler
+{
+  document.querySelector(".fade").onclick = () => {
+    let popup = document.getElementById("popup"),
+      fade = document.querySelector(".fade");
+
+    popup.className = "popup";
+    fade.style.display = "none";
+  };
+}
+
+// ! managing the window resize event handler
+{
+  function windowResizeTabletHandler() {
+    let windowWidth = window.innerWidth,
+      parent = document.querySelector(".cards__user"),
+      profileElement = parent.querySelector(".user__profile"),
+      buttonsElement = parent.querySelector(".user__buttons"),
+      wrapperElement = parent.children.item(0);
+
+    if (windowWidth > 414 && windowWidth <= 1000) {
+      // ! if tablet
+      wrapperElement.append(profileElement, buttonsElement);
+      wrapperElement.style.display = "flex";
+    } else {
+      // ! if not tablet fixing the changes
+      parent.insertBefore(profileElement, wrapperElement.nextElementSibling);
+      parent.append(buttonsElement);
+      while (wrapperElement.firstChild) {
+        wrapperElement.removeChild(wrapperElement.firstChild);
+      }
+      wrapperElement.style.display = "none";
+    }
+  }
+  windowResizeTabletHandler();
+  window.addEventListener("resize", windowResizeTabletHandler);
 }

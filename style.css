@@ -1,22 +1,3 @@
-* {
-  padding: 0px;
-  margin: 0px;
-  box-sizing: border-box;
-  outline: none;
-  border: none;
-}
-
-ul,
-ol,
-li {
-  list-style: none;
-}
-
-body {
-  font-family: Arial, Helvetica, sans-serif;
-  color: white;
-}
-
 /* !global vars start */
 
 :root {
@@ -114,8 +95,69 @@ input:focus {
   background-color: #004e82;
 }
 .add-btn:focus-visible {
-  outline: 2px solid white;
+  outline: 2px solid 1000px;
 }
+
+@media screen and (max-width: 1000px) {
+  .registration-items-bg {
+    padding: 12px 10px;
+    background-color: var(--backgroundcolorofcards);
+    box-shadow: inset 0px 0px 10px rgba(0, 0, 0, 0.43);
+    font-size: 2em;
+    border-radius: 8px;
+  }
+
+  .registration__label {
+    font-size: 1.6em;
+    color: white;
+    margin-left: 5px;
+  }
+  .registration__parent {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+  }
+  .primary-button {
+    padding: 8px 15px;
+    border-radius: 9px;
+    outline: none;
+    border: none;
+    background-color: #0062a2;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+    overflow: hidden;
+    position: relative;
+  }
+  .primary-button:hover {
+    background-color: #005993;
+  }
+  .primary-button:focus-visible {
+    outline: 2px white solid;
+  }
+
+  input {
+    color: white;
+    caret-color: white;
+  }
+
+  input::placeholder {
+    color: var(--grayColorFont);
+  }
+  input:focus {
+    outline: 2px solid white;
+  }
+  .cancel-btn {
+    font-size: 12px;
+    padding: 5px 10px;
+  }
+
+  .add-btn {
+    padding: 5px 10px;
+    font-size: 12px;
+  }
+}
+
 /* ! common used styles end*/
 
 /* ! registration start*/
@@ -129,7 +171,7 @@ input:focus {
   max-width: 338px;
   gap: 10px;
   position: absolute;
-  top: 43%;
+  top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   opacity: 1;
@@ -157,10 +199,6 @@ input:focus {
   font-weight: 300;
 }
 
-/* ?.registration__username {} */
-/* ?.username__label {} */
-/* ?.username__input {} */
-
 .registration__limits {
   display: flex;
   justify-content: space-between;
@@ -171,14 +209,9 @@ input:focus {
 .limits__income {
   width: calc((382px / 100) * 38);
 }
-/* ?.income__label {}
-?.income__input {} */
-
 .limits__expense {
   width: calc((382px / 100) * 38);
 }
-/* ?.expense__label {}
-?.expense__input {} */
 
 .registration__note {
   margin-top: 10px;
@@ -191,8 +224,6 @@ input:focus {
 }
 .registration__confirm {
   margin-top: 10px;
-  /* justify-self: end;
-  align-self: flex-end; */
   font-size: 2em;
 }
 
@@ -208,7 +239,6 @@ input:focus {
   flex-direction: column;
   gap: 20px;
   position: relative;
-  overflow: hidden;
 }
 
 /* ! the up side content start */
@@ -290,6 +320,13 @@ input:focus {
     color: var(--grayColorFont);
     align-self: flex-end;
   }
+  .progress-bar-parent {
+    width: 100%;
+    height: 8px;
+    background-color: #9e9e9e;
+    border-radius: 100px;
+    position: relative;
+  }
   .income__progress {
     display: flex;
     flex-direction: column;
@@ -319,7 +356,7 @@ input:focus {
     position: absolute;
     top: 0;
     left: 0;
-    animation: all 1s;
+    transition: all 0.8s ease-in-out;
   }
   #expense-progress-bar {
     background-color: #ff0000;
@@ -329,6 +366,7 @@ input:focus {
     position: absolute;
     top: 0;
     left: 0;
+    transition: all 0.8s ease-in-out;
   }
   .income__divider {
     align-self: flex-end;
@@ -355,6 +393,75 @@ input:focus {
   }
 }
 
+/* ? priceboard media query 1300px */
+@media screen and (max-width: 1300px) {
+  .priceboard {
+    font-size: 7px;
+  }
+}
+
+/* ? priceboard media query 1000px */
+@media screen and (max-width: 1000px) {
+  .priceboard {
+    grid-template-areas: "priceboard-income time priceboard-expense";
+    grid-template-columns: 40% 20% 40%;
+    font-size: 7px;
+    padding: 15px 0px;
+
+    .income__main {
+      gap: 15px;
+    }
+    .expense-priceboard {
+      display: flex;
+    }
+    .expense__main {
+      align-items: end;
+      padding: 0px 14px 0px 10px;
+      order: 1;
+    }
+    .expense__alltime {
+      flex-direction: row-reverse;
+    }
+    .expense__today {
+      flex-direction: row-reverse;
+    }
+    .expense__rest {
+      flex-direction: row-reverse;
+    }
+    .progress-bar-parent {
+      height: 7px;
+    }
+    .income__progress {
+      gap: 5px;
+    }
+    .income__progress-bar {
+      height: 7px;
+    }
+    #expense-progress-bar {
+      height: 7px;
+    }
+    .expense__divider {
+      order: 0;
+    }
+    .priceboard__time {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding-right: 0px;
+    }
+    .time__date {
+      font-size: 2.6em;
+      font-weight: 700;
+      line-height: 1;
+    }
+    .time__hour {
+      font-size: 2.1em;
+      font-weight: 700;
+      color: var(--grayColorFont);
+    }
+  }
+}
+
 /* ! the up side content end */
 
 /* ! the cards content start */
@@ -366,6 +473,7 @@ input:focus {
   flex: 1 1 100%;
   visibility: hidden;
   opacity: 0;
+  font-size: 10px;
 
   #cards-income {
     grid-area: cards-income;
@@ -374,6 +482,12 @@ input:focus {
   #cards-expense {
     grid-area: cards-expense;
     margin: 0px 14px;
+  }
+  .pricecard__income-border {
+    display: none;
+  }
+  .pricecard__expense-border {
+    display: none;
   }
   .cards__pricecard {
     background-color: var(--backgroundcolorofcards);
@@ -399,7 +513,7 @@ input:focus {
     gap: 4px;
   }
   .pricecard__input-label {
-    font-size: 0.9em;
+    font-size: 1.8em;
     color: white;
     margin-left: 12px;
   }
@@ -408,7 +522,7 @@ input:focus {
     background-color: transparent;
     border: 1px solid white;
     border-radius: var(--borderRadiusPrimary);
-    font-size: 1.1em;
+    font-size: 1.8em;
   }
 
   .pricecard__input-input:focus {
@@ -433,12 +547,12 @@ input:focus {
     flex: 1 1 auto;
   }
   .list__title {
-    font-size: 2.1em;
+    font-size: 3.2em;
     text-align: center;
   }
   .list__title span {
     color: var(--grayColorFont);
-    font-size: 0.5em;
+    font-size: 0.6em;
   }
   .list__list-wrapper {
     display: flex;
@@ -470,7 +584,7 @@ input:focus {
   }
   .list__item-amount {
     padding: 10px 6px;
-    font-size: 1.7em;
+    font-size: 2.8em;
     font-weight: 700;
     flex: 0 0 15%;
     overflow: hidden;
@@ -482,11 +596,11 @@ input:focus {
   }
   .list__item-date {
     padding: 10px 6px;
-    font-size: 1.7em;
+    font-size: 2.8em;
   }
   .list__item-desc {
     padding: 10px 6px;
-    font-size: 1.7em;
+    font-size: 2.8em;
     font-style: italic;
     white-space: nowrap;
     overflow: hidden;
@@ -524,7 +638,7 @@ input:focus {
     object-fit: contain;
   }
   .profile__username {
-    font-size: 2.3em;
+    font-size: 4em;
   }
   .user__cards {
     display: grid;
@@ -541,12 +655,12 @@ input:focus {
     gap: 25px;
   }
   .card__title {
-    font-size: 1.5em;
+    font-size: 2.2em;
     color: var(--grayColorFont);
     flex: 1 0 0px;
   }
   .card__desc {
-    font-size: 1.4em;
+    font-size: 2.2em;
     align-self: flex-end;
     justify-self: flex-end;
   }
@@ -561,7 +675,7 @@ input:focus {
     background-color: transparent;
     border: 1px solid white;
     border-radius: var(--borderRadiusPrimary);
-    font-size: 1.1em;
+    font-size: 2em;
     max-width: 0%;
     display: none;
   }
@@ -570,7 +684,7 @@ input:focus {
     background-color: transparent;
     border: 1px solid white;
     border-radius: var(--borderRadiusPrimary);
-    font-size: 1.1em;
+    font-size: 2em;
     height: 32px;
     display: block;
     animation: limit-set forwards linear 0.5s;
@@ -616,6 +730,15 @@ input:focus {
     transition: background-color 0.3s;
     animation: limit-set forwards linear 0.5s;
   }
+  .cancel-btn-active:hover {
+    background-color: #e30000;
+  }
+  .cancel-btn-active:active {
+    background-color: #bb0000;
+  }
+  .cancel-btn-active:focus-visible {
+    outline: 2px solid white;
+  }
   .add-btn-active {
     background-color: var(--primaryBlue);
     padding: 8px 15px;
@@ -625,6 +748,127 @@ input:focus {
     cursor: pointer;
     transition: background-color 0.3s;
     animation: limit-set forwards linear 0.5s;
+  }
+  .add-btn-active:hover {
+    background-color: #005993;
+  }
+  .add-btn-active:active {
+    background-color: #004e82;
+  }
+  .add-btn-active:focus-visible {
+    outline: 2px solid white;
+  }
+}
+
+/* ? cards media query 1300px */
+@media screen and (max-width: 1300px) {
+  .cards {
+    font-size: 7px;
+  }
+}
+
+/* ? cards media query 1000px*/
+@media screen and (max-width: 1000px) {
+  .cards {
+    display: grid;
+    grid-template-areas:
+      "cards-income cards-expense"
+      "cards__card cards__card";
+    grid-template-columns: 50% 50% 100%;
+    font-size: 7px;
+    row-gap: 20px;
+
+    #cards-income {
+      grid-area: cards-income;
+      margin-right: 0px;
+      border-right: 0px;
+      position: relative;
+    }
+    #cards-expense {
+      grid-area: cards-expense;
+      margin: 0px 0px;
+      border-left: 0px;
+      position: relative;
+    }
+    .pricecard__income-border {
+      display: block;
+      position: absolute;
+      right: 0;
+      top: 0;
+      border-radius: 100px;
+      width: 1px;
+      height: calc(100% - 40px);
+      background-color: #bfbfbf;
+      margin: 20px 0px;
+    }
+    .pricecard__expense-border {
+      display: block;
+      position: absolute;
+      left: 0;
+      top: 0;
+      border-radius: 100px;
+      width: 1px;
+      height: calc(100% - 40px);
+      background-color: #bfbfbf;
+      margin: 20px 0px;
+    }
+
+    .cards__pricecard {
+      gap: 25px;
+      padding: 20px 0px;
+    }
+    .pricecard__main {
+      padding: 0px 30px;
+    }
+    .pricecard__buttons {
+      gap: 10px;
+    }
+
+    .pricecard__divider-income {
+      margin-left: 30px;
+      width: calc(100% - 30px);
+    }
+    .pricecard__divider-expense {
+      margin-right: 30px;
+      width: calc(100% - 30px);
+    }
+    .pricecard__list {
+      padding: 0px 30px;
+      gap: 15px;
+      flex: 1 0 200px;
+    }
+    .cards__user {
+      grid-area: cards__card;
+      margin-left: 0px;
+      flex-direction: row;
+      gap: 55px;
+      padding: 20px 30px;
+      flex: 0;
+    }
+    .user__profile {
+      flex-direction: row;
+      gap: 15px;
+    }
+    .user__buttons {
+      gap: 10px;
+    }
+
+    .cancel-btn-hidden {
+      padding: 5px 10px;
+      font-size: 12px;
+    }
+    .add-btn-hidden {
+      padding: 5px 10px;
+      font-size: 12px;
+    }
+    .cancel-btn-active {
+      padding: 5px 10px;
+      font-size: 12px;
+    }
+    .add-btn-active {
+      padding: 5px 10px;
+      font-size: 12px;
+    }
   }
 }
 
@@ -645,8 +889,9 @@ input:focus {
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 10;
+  visibility: visible;
   opacity: 1;
-  transition: all 0.5s;
+  transition: all 0.3s;
 }
 
 .popup {
@@ -658,12 +903,13 @@ input:focus {
   font-size: 10px;
   min-width: 350px;
   position: absolute;
-  top: 100%;
+  bottom: 0;
   left: 50%;
   transform: translate(-50%, 0%);
   z-index: 10;
+  visibility: hidden;
   opacity: 0;
-  transition: all 0.5s;
+  transition: all 0.3s;
 }
 
 .popup__title {
@@ -684,7 +930,7 @@ input:focus {
   padding: 16px 10px;
   background-color: #2d337e;
   border-radius: 10px;
-  box-shadow: inset 0 0 20px 0px rgba(0, 0, 0, 0.5);
+  box-shadow: inset 0 0 20px 0px rgba(0, 0, 0, 0.2);
 }
 .content__amount-static,
 .content__date-static {
@@ -701,6 +947,7 @@ input:focus {
   padding: 16px 10px;
   background-color: #2d337e;
   border-radius: 10px;
+  max-width: 338px;
   box-shadow: inset 0 0 20px 0px rgba(0, 0, 0, 0.5);
 }
 .content__desc-static {
@@ -710,6 +957,7 @@ input:focus {
 .content__desc-text {
   font-size: 2em;
   color: white;
+  word-break: break-all;
 }
 .content__buttons {
   display: flex;
