@@ -952,17 +952,10 @@ input:focus {
     .cancel-btn-active {
       padding: 5px 10px;
       font-size: 12px;
-      display: flex;
-      align-self: flex-start;
     }
     .add-btn-active {
       padding: 5px 10px;
       font-size: 12px;
-      display: flex;
-      align-self: flex-start;
-    }
-    .set-limit-active {
-      margin-bottom: 200px;
     }
   }
 }
