@@ -473,7 +473,6 @@ function showPopup(thisItem) {
     input.placeholder = "income limit... 120";
     input.classList = "set-limit-active";
 
-    input.focus();
     input.onkeydown = function (e) {
       if (e.key === "Enter") {
         okButtonHandler();
@@ -529,7 +528,6 @@ function showPopup(thisItem) {
     input.placeholder = "expense limit... 120";
     input.classList = "set-limit-active";
 
-    input.focus();
     input.onkeydown = function (e) {
       if (e.key === "Enter") {
         okButtonHandler();
