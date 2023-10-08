@@ -265,7 +265,7 @@ input:focus {
 /* ! wrapper-dashboard media query 768px */
 @media screen and (max-width: 768px) {
   .wrapper-dashboard {
-    padding: 20px 100px;
+    padding: 100px 20px;
   }
 }
 
