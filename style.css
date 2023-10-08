@@ -262,6 +262,13 @@ input:focus {
   position: relative;
 }
 
+/* ! wrapper-dashboard media query 768px */
+@media screen and (max-width: 768px) {
+  .wrapper-dashboard {
+    padding: 20px 100px;
+  }
+}
+
 /* ! the up side content start */
 
 .priceboard {
