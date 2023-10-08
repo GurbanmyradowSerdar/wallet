@@ -473,9 +473,10 @@ function showPopup(thisItem) {
     input.placeholder = "income limit... 120";
     input.classList = "set-limit-active";
 
-    if (innerWidth > 1000) {
-      input.focus();
-    }
+    input.focus();
+    input.addEventListener("focus", function () {
+      inputElement.scrollIntoView({ behavior: "smooth", block: "center" });
+    });
     input.onkeydown = function (e) {
       if (e.key === "Enter") {
         okButtonHandler();
@@ -531,9 +532,10 @@ function showPopup(thisItem) {
     input.placeholder = "expense limit... 120";
     input.classList = "set-limit-active";
 
-    if (innerWidth > 1000) {
-      input.focus();
-    }
+    input.focus();
+    input.addEventListener("focus", function () {
+      input.scrollIntoView({ behavior: "smooth", block: "center" });
+    });
     input.onkeydown = function (e) {
       if (e.key === "Enter") {
         okButtonHandler();
