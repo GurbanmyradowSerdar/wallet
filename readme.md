@@ -1,6 +1,6 @@
 # WALLET
 
-https://gurbanmyradowserdar.github.io/wallet/
+https://wallet-gray.vercel.app
 
 Here you can note your income and expense
 
