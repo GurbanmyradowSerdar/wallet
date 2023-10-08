@@ -22,6 +22,9 @@ class Out {
 let inArr = [];
 let outArr = [];
 
+// ! popup scroll position
+let topPosition = 0;
+
 // ! Set values in localStorage ///////////////////////////////////////////////////////
 function save() {
   if (inArr.length > 0) {
@@ -381,6 +384,13 @@ function showPopup(thisItem) {
     desc = `${thisItem.children.item(4).innerText}`;
 
   // ! implementing ui
+  if (topPosition === 0) {
+    popup.style.top = `50%`;
+    popup.style.transform = `translate(-50%, -50%)`;
+  } else {
+    popup.style.top = `${topPosition + (innerHeight / 100) * 30}px`;
+    popup.style.transform = `translate(-50%, 0%)`;
+  }
   popup.className = "popup-active";
   fade.style.display = "block";
   amountElement.innerText = amount;
@@ -394,6 +404,8 @@ function showPopup(thisItem) {
   okElement.onclick = function () {
     popup.className = "popup";
     fade.style.display = "none";
+    popup.style.top = `${innerHeight - popup.offsetHeight}px`;
+    popup.style.transform = null;
   };
   deleteElement.onclick = function () {
     let item = {};
@@ -690,12 +702,18 @@ function showPopup(thisItem) {
 
     popup.className = "popup";
     fade.style.display = "none";
+    popup.style.top = `${innerHeight - popup.offsetHeight}px`;
+    popup.style.transform = null;
   };
 }
 
 // ! managing the window resize event handler
 {
   function windowResizeTabletHandler() {
+    // ! popup checking
+    let popup = document.getElementById("popup");
+    popup.style.top = `${innerHeight - popup.offsetHeight}px`;
+
     let windowWidth = window.outerWidth,
       parent = document.querySelector(".cards__user"),
       profileElement = parent.querySelector(".user__profile"),
@@ -735,3 +753,8 @@ function showPopup(thisItem) {
   windowResizeTabletHandler();
   window.addEventListener("resize", windowResizeTabletHandler);
 }
+
+// ! calculating the topPosition of popup event handler
+window.addEventListener("scroll", function (ev) {
+  topPosition = window.scrollY;
+});

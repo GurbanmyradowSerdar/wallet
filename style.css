@@ -1061,7 +1061,7 @@ input:focus {
   font-size: 10px;
   min-width: 350px;
   position: absolute;
-  bottom: 0;
+  /* bottom: 0; */
   left: 50%;
   transform: translate(-50%, 0%);
   z-index: 10;
@@ -1142,7 +1142,7 @@ input:focus {
     z-index: 10;
     visibility: visible;
     opacity: 1;
-    transition: all 0.3s;
+    transition: all 0.5s;
   }
   .popup {
     gap: 10px;
@@ -1151,13 +1151,12 @@ input:focus {
     max-width: 280px;
     min-width: 280px;
     position: absolute;
-    bottom: 0;
     left: 50%;
     transform: translate(-50%, 0%);
     z-index: 10;
     visibility: hidden;
     opacity: 0;
-    transition: all 0.3s;
+    transition: all 0.5s;
   }
   .popup__content {
     gap: 15px;
