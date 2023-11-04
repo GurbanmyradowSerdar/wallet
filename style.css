@@ -148,12 +148,12 @@ input:focus {
     outline: 2px solid white;
   }
   .cancel-btn {
-    font-size: 12px;
-    padding: 5px 10px;
+    font-size: 13px;
+    padding: 8px 13px;
   }
 
   .add-btn {
-    padding: 5px 10px;
+    padding: 8px 13px;
     font-size: 12px;
   }
 }
@@ -782,7 +782,7 @@ input:focus {
     background-color: #22276f;
     outline: 1px solid white;
   }
-  .user__buttons-primiry {
+  .user__buttons-primary {
     display: flex;
     gap: 10px;
     flex-wrap: wrap;

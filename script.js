@@ -457,7 +457,7 @@ function showPopup(thisItem) {
   let setIncomeLimit = document.getElementById("set-income-limit"),
     setExpenseLimit = document.getElementById("set-expense-limit"),
     deleteAll = document.getElementById("delete-all"),
-    parentOfButtons = document.querySelector(".user__buttons-primiry"),
+    parentOfButtons = document.querySelector(".user__buttons-primary"),
     okButton = parentOfButtons.children.item(1),
     cancelButton = parentOfButtons.children.item(2);
   // ! income limit buttons
